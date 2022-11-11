@@ -18,3 +18,10 @@ from within the folder you cloned the repository.
 # Exercise
 
 Import the file `API-Testing.postman_collection.json` into Postman and execute tests.
+
+## Troubleshooting (Mac M1 processor)
+
+The keycloak image used in some of the excercises
+is not compatible with the new M1 processor of Mac.
+In order to run the samples, please checkout main branch first
+and follow the instructions there.

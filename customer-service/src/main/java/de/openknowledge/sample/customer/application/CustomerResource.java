@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -64,6 +65,7 @@ public class CustomerResource {
 
     @GET
     @Path("/")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Customer> getCustomers() {
         LOG.info("RESTful call 'GET all customers'");
@@ -72,6 +74,7 @@ public class CustomerResource {
 
     @POST
     @Path("/")
+    @RolesAllowed("admin")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createCustomer(Customer customer, @Context UriInfo uri) throws URISyntaxException {
         LOG.info("RESTful call 'POST new customer'");
@@ -80,6 +83,7 @@ public class CustomerResource {
     }
 
     @GET
+    @RolesAllowed("user")
     @Path("/{customerNumber}")
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getCustomer(@PathParam("customerNumber") CustomerNumber customerNumber) {
@@ -91,6 +95,7 @@ public class CustomerResource {
     }
 
     @PUT
+    @RolesAllowed("user")
     @Path("/{customerNumber}/billing-address")
     @Produces(MediaType.APPLICATION_JSON)
     public void setBillingAddress(@PathParam("customerNumber") CustomerNumber customerNumber, Address billingAddress) {
@@ -100,6 +105,7 @@ public class CustomerResource {
     }
 
     @PUT
+    @RolesAllowed("user")
     @Path("/{customerNumber}/delivery-address")
     @Produces(MediaType.APPLICATION_JSON)
     public void setDeliveryAddress(@PathParam("customerNumber") CustomerNumber customerNumber,

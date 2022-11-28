@@ -30,11 +30,8 @@ components:
       properties:
         number:
           type: "string"
-        fullName:
-          type: "object"
-          properties:
-            firstName: "string"
-            lastName: "string"
+        name:
+          type: "string"
         billingAddress:
           type: "object"
           $ref: "#/components/schemas/Address"
@@ -46,11 +43,8 @@ components:
       properties:
         number:
           type: "string"
-        fullName:
-          type: "object"
-          properties:
-            firstName: "string"
-            lastName: "string"
+        name:
+          type: "string"
 paths:
   /customers/{customerNumber}/billing-address:
     put:
@@ -66,7 +60,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.de.openknowledge.sample.customer.v2+json:
+          application/json:
             schema:
               type: "object"
               $ref: "#/components/schemas/Address"
@@ -87,7 +81,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.de.openknowledge.sample.customer.v2+json:
+          application/json:
             schema:
               type: "object"
               $ref: "#/components/schemas/Address"
@@ -103,7 +97,7 @@ paths:
         "200":
           description: "default response"
           content:
-            application/vnd.de.openknowledge.sample.customer.v2+json:
+            application/json:
               schema:
                 type: "array"
                 items:
@@ -116,7 +110,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.de.openknowledge.sample.customer.v2+json:
+          application/json:
             schema:
               type: "object"
               $ref: "#/components/schemas/SimpleCustomer"
@@ -138,7 +132,7 @@ paths:
         "200":
           description: "default response"
           content:
-            application/vnd.de.openknowledge.sample.customer.v2+json:
+            application/json:
               schema:
                 type: "object"
                 $ref: "#/components/schemas/Customer"

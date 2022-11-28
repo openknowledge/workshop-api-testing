@@ -76,7 +76,7 @@ public class CustomerResource {
 
     @GET
     @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, CustomMediaType.CUSTOMER_V1, CustomMediaType.CUSTOMER_V2})
     @APIResponse(content = @Content(schema = @Schema(type = ARRAY, ref = "#/components/schemas/SimpleCustomer")))
     public List<Customer> getCustomers() {
         LOG.info("RESTful call 'GET all customers'");
@@ -85,7 +85,7 @@ public class CustomerResource {
 
     @POST
     @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, CustomMediaType.CUSTOMER_V1, CustomMediaType.CUSTOMER_V2})
     @RequestBody(content = @Content(schema = @Schema(ref = "#/components/schemas/SimpleCustomer")))
     public Response createCustomer(Customer customer, @Context UriInfo uri) throws URISyntaxException {
         LOG.info("RESTful call 'POST new customer'");
@@ -95,7 +95,7 @@ public class CustomerResource {
 
     @GET
     @Path("/{customerNumber}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, CustomMediaType.CUSTOMER_V1, CustomMediaType.CUSTOMER_V2})
     @APIResponse(content = @Content(schema = @Schema(type = OBJECT, ref = "#/components/schemas/Customer")))
     public Customer getCustomer(
     		@PathParam("customerNumber") @Parameter(name = "customerNumber", in = PATH, schema = @Schema(type = STRING)) CustomerNumber customerNumber) {
@@ -108,7 +108,7 @@ public class CustomerResource {
 
     @PUT
     @Path("/{customerNumber}/billing-address")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, CustomMediaType.CUSTOMER_V1, CustomMediaType.CUSTOMER_V2})
     @RequestBody(content = @Content(schema = @Schema(ref = "#/components/schemas/Address")))
     @APIResponse(responseCode = "204", content = @Content(schema = @Schema(type = DEFAULT)))
     public void setBillingAddress(
@@ -121,7 +121,7 @@ public class CustomerResource {
 
     @PUT
     @Path("/{customerNumber}/delivery-address")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, CustomMediaType.CUSTOMER_V1, CustomMediaType.CUSTOMER_V2})
     @RequestBody(content = @Content(schema = @Schema(ref = "#/components/schemas/Address")))
     @APIResponse(responseCode = "204", content = @Content(schema = @Schema(type = DEFAULT)))
     public void setDeliveryAddress(

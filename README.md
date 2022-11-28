@@ -17,4 +17,8 @@ from within the folder you cloned the repository.
 
 # Exercise
 
-Call [OpenAPI UI](http://localhost:4000/openapi-ui) and try the api.
+Run
+```
+docker run --rm -t -v $(pwd)/customer-service/src/main/resources/META-INF:/specs:ro openapitools/openapi-diff:2.0.1 /specs/v1.0.yaml /specs/v1.1.yaml
+```
+to compare the versions.

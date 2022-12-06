@@ -15,6 +15,8 @@
  */
 package de.openknowledge.sample.customer.application.v1;
 
+import static java.util.Optional.ofNullable;
+
 import javax.json.bind.annotation.JsonbProperty;
 
 import de.openknowledge.sample.address.domain.Address;
@@ -116,7 +118,9 @@ public class CustomerV1 {
     }
 
     public Customer toV2() {
-        Customer customer = new Customer(number, fullName);
+        Customer customer = ofNullable(number)
+            .map(customerNumber -> new Customer(number, fullName))
+            .orElseGet(() -> new Customer(fullName));
         customer.setBillingAddress(billingAddress);
         customer.setDeliveryAddress(deliveryAddress);
         return customer;

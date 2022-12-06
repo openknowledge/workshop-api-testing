@@ -33,8 +33,10 @@ components:
         fullName:
           type: "object"
           properties:
-            firstName: "string"
-            lastName: "string"
+            firstName:
+              type: "string"
+            lastName:
+              type: "string"
         billingAddress:
           type: "object"
           $ref: "#/components/schemas/Address"
@@ -49,8 +51,10 @@ components:
         fullName:
           type: "object"
           properties:
-            firstName: "string"
-            lastName: "string"
+            firstName:
+              type: "string"
+            lastName:
+              type: "string"
 paths:
   /customers/{customerNumber}/billing-address:
     put:

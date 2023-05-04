@@ -1,0 +1,56 @@
+services:
+  customer-service:
+    build: customer-service/
+    container_name: customer-service
+    ports:
+      - "4000:8080"
+    environment:
+      - BILLING_SERVICE_URL=http://billing-service:8080
+      - DELIVERY_SERVICE_URL=http://delivery-service:8080
+
+  billing-service:
+    build: billing-service/
+    ports:
+      - "4001:8080"
+
+  delivery-service:
+    build: delivery-service/
+    ports:
+      - "4002:8080"
+    environment:
+      - ADDRESS_VALIDATION_SERVICE_URL=http://address-validation-service:8080
+
+  address-validation-service:
+    build: address-validation-service/
+    ports:
+      - "4003:8080"
+
+  postgres:
+    image: postgres
+    healthcheck:
+      test: psql postgres --command "select 1" -U postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+
+  pact-broker:
+    image: pactfoundation/pact-broker:latest
+    ports:
+      - "9292:9292"
+    depends_on:
+      - postgres
+    environment:
+      PACT_BROKER_PORT: '9292'
+      PACT_BROKER_DATABASE_URL: "postgres://postgres:password@postgres/postgres"
+      PACT_BROKER_LOG_LEVEL: INFO
+      PACT_BROKER_SQL_LOG_LEVEL: DEBUG
+      # The list of allowed base URLs (not setting this makes the app vulnerable to cache poisoning)
+      # This list allows the app to be addressed from the host and from within another docker container correctly
+      # Ngnix config below makes the app accessible on ports 443 and 80, while the Ruby application itself runs on port 9292
+      PACT_BROKER_BASE_URL: 'https://localhost http://localhost http://localhost:9292 http://pact-broker:9292 https://host.docker.internal http://host.docker.internal http://host.docker.internal:9292'
+
+  backstage:
+    build: backstage/
+    ports:
+      - 7007:7007

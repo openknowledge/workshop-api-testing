@@ -35,6 +35,8 @@ backend:
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
+  pact:
+    url: http://localhost:9292/pacts/latest
   github:
     - host: github.com
       # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
@@ -79,17 +81,17 @@ catalog:
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
-      target: ./examples/entities.yaml
+      target: ./../../examples/entities.yaml
 
     # Local example template
     - type: file
-      target: ./examples/template/template.yaml
+      target: ./../../examples/template/template.yaml
       rules:
         - allow: [Template]
 
     # Local example organizational data
     - type: file
-      target: ./examples/org.yaml
+      target: ./../../examples/org.yaml
       rules:
         - allow: [User, Group]
 

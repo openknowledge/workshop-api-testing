@@ -25,26 +25,16 @@ services:
     ports:
       - "4003:8080"
 
-  postgres:
-    image: postgres
-    healthcheck:
-      test: psql postgres --command "select 1" -U postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-
-  pact-broker:
+  pact:
     image: pactfoundation/pact-broker:latest
     ports:
       - "9292:9292"
-    depends_on:
-      - postgres
     environment:
       PACT_BROKER_PORT: '9292'
-      PACT_BROKER_DATABASE_URL: "postgres://postgres:password@postgres/postgres"
       PACT_BROKER_LOG_LEVEL: INFO
       PACT_BROKER_SQL_LOG_LEVEL: DEBUG
+      PACT_BROKER_DATABASE_ADAPTER: sqlite
+      PACT_BROKER_DATABASE_NAME: pact_broker.sqlite
       # The list of allowed base URLs (not setting this makes the app vulnerable to cache poisoning)
       # This list allows the app to be addressed from the host and from within another docker container correctly
       # Ngnix config below makes the app accessible on ports 443 and 80, while the Ruby application itself runs on port 9292

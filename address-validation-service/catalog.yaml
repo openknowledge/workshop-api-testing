@@ -1,0 +1,26 @@
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: address-validation-service
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
+  system: workshop-api-testing
+  providesApis:
+    - address-validation-service-api
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: address-validation-service-api
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: guests
+  system: workshop-api-testing
+  definition: |
+    --> Insert here the address-validation-service API definition <---

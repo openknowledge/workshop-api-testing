@@ -1,5 +1,5 @@
 # Stage 1 - Create yarn install skeleton layer
-FROM node:16-bullseye-slim AS packages
+FROM node:18-bullseye-slim AS packages
 
 WORKDIR /app
 COPY package.json yarn.lock ./
@@ -12,7 +12,7 @@ COPY packages packages
 RUN find packages \! -name "package.json" -mindepth 2 -maxdepth 2 -exec rm -rf {} \+
 
 # Stage 2 - Install dependencies and build packages
-FROM node:16-bullseye-slim AS build
+FROM node:18-bullseye-slim AS build
 
 # install sqlite3 dependencies
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -43,14 +43,14 @@ RUN mkdir packages/backend/dist/skeleton packages/backend/dist/bundle \
     && tar xzf packages/backend/dist/bundle.tar.gz -C packages/backend/dist/bundle
 
 # Stage 3 - Build the actual backend image and install production dependencies
-FROM node:16-bullseye-slim
+FROM node:18-bullseye-slim
 
 # Install sqlite3 dependencies. You can skip this if you don't use sqlite3 in the image,
 # in which case you should also move better-sqlite3 to "devDependencies" in package.json.
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && \
-    apt-get install -y --no-install-recommends libsqlite3-dev python3 build-essential && \
+    apt-get install -y --no-install-recommends libsqlite3-dev python3 build-essential curl && \
     yarn config set python /usr/bin/python3
 
 # From here on we use the least-privileged `node` user to run the backend.
@@ -72,7 +72,7 @@ COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
 
 # Copy any other files that we need at runtime
 COPY --chown=node:node app-config.yaml ./
-COPY --chown=node:node examples examples
+COPY --chown=node:node examples /examples
 
 # This switches many Node.js dependencies to production mode.
 ENV NODE_ENV production

@@ -36,7 +36,7 @@ backend:
 
 integrations:
   pact:
-    url: http://localhost:9292/pacts/latest
+    url: ${PACT_URL}
   github:
     - host: github.com
       # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information

@@ -19,8 +19,8 @@ The [Pact Broker](http://localhost:9292/) should only contain an example pact th
 
 To publish the pacts you can execute the following commands:
 ```
-mvn pact:publish ./customer-service
-mvn pact:publish ./delivery-service
+mvn -f ./customer-service/pom.xml pact:publish
+mvn -f ./delivery-service/pom.xml pact:publish
 ```
 
 After publishing the pacts you can see the relationships of the customer-service in the catalog graph: [Catalog Graph](http://localhost:7007/catalog-graph?rootEntityRefs%5B%5D=component%3Adefault%2Fcustomer-service&maxDepth=%E2%88%9E&selectedKinds%5B%5D=api&selectedKinds%5B%5D=component&unidirectional=false&mergeRelations=true&direction=LR&showFilters=true)

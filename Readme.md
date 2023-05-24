@@ -18,7 +18,7 @@ The [Pact Broker](http://localhost:9292/) should only contain an example pact th
 ## Publish pacts:
 
 To publish the pacts you can execute the following commands:
-```sh
+```
 mvn pact:publish ./customer-service
 mvn pact:publish ./delivery-service
 ```
@@ -30,3 +30,12 @@ After publishing the pacts you can see the relationships of the customer-service
 
 - The catalog files of the four services are placed in [backstage/examples](backstage/examples)
 - The frequence of the pact provider timer can be set in the [catalog.ts](backstage/packages/backend/src/plugins/catalog.ts)
+
+## Start Backstage.io manually
+
+To start backstage manually in developer mode execute the following commands from the project root with Node v18:
+```sh
+cd backstage
+export PACT_URL=http://localhost:9292/pacts/latest
+yarn dev
+```

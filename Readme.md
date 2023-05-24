@@ -22,3 +22,9 @@ mvn pact:publish ./delivery-service
 ```
 
 After publishing the pacts you can see the relationships of the customer-service in the catalog graph: [Catalog Graph](http://localhost:7007/catalog-graph?rootEntityRefs%5B%5D=component%3Adefault%2Fcustomer-service&maxDepth=%E2%88%9E&selectedKinds%5B%5D=api&selectedKinds%5B%5D=component&unidirectional=false&mergeRelations=true&direction=LR&showFilters=true)
+
+
+## Other
+
+- The catalog files of the four services are placed in [backstage/examples](backstage/examples)
+- The frequence of the pact provider timer can be set in the [catalog.ts](backstage/packages/backend/src/plugins/catalog.ts)

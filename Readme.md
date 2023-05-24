@@ -13,6 +13,8 @@ After that you can see the four services with their provided APIs in the backsta
 The relationships in the catalog graph should only show the provided API of the customer service: 
 - [Catalog Graph](http://localhost:7007/catalog-graph?rootEntityRefs%5B%5D=component%3Adefault%2Fcustomer-service&maxDepth=%E2%88%9E&selectedKinds%5B%5D=api&selectedKinds%5B%5D=component&unidirectional=false&mergeRelations=true&direction=LR&showFilters=true)
 
+The [Pact Broker](http://localhost:9292/) should only contain an example pact that can be deleted manually.
+
 ## Publish pacts:
 
 To publish the pacts you can execute the following commands:

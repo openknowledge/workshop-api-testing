@@ -72,7 +72,6 @@ export class PactBrokerProvider implements EntityProvider {
 
             let consumerEntity = findComponentEntityByName(entities, pact._embedded.consumer.name);
             if (consumerEntity !== undefined) {
-                console.log(consumerEntity.metadata.name + " : " + apiName)
                 consumerEntity.spec.consumesApis?.push(apiName);
             }
         });

@@ -20,8 +20,8 @@ export default async function createPlugin(
     fn: async () => {
       await pactBrokerProvider.run();
     },
-    frequency: { seconds: 10 },
-    timeout: { seconds: 3 },
+    frequency: { seconds: 5 },
+    timeout: { seconds: 2 },
   });
 
   return router;

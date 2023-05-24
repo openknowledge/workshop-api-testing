@@ -82,15 +82,6 @@ catalog:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
       target: ./../../examples/entities.yaml
-    # Local example data, file locations are relative to the backend process, typically `packages/backend`
-    - type: file
-      target: ./../../../address-validation-service/catalog.yaml
-    - type: file
-      target: ./../../../billing-service/catalog.yaml
-    - type: file
-      target: ./../../../customer-service/catalog.yaml
-    - type: file
-      target: ./../../../delivery-service/catalog.yaml
 
     # Local example template
     - type: file

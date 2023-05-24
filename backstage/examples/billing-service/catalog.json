@@ -14,8 +14,9 @@
       "lifecycle": "experimental",
       "owner": "guests",
       "providesApis": [
-        "billing-service-api-api"
-      ]
+        "billing-service-api"
+      ],
+      "consumesApis": []
     }
   },
   {
@@ -32,7 +33,7 @@
       "type": "openapi",
       "lifecycle": "experimental",
       "owner": "guests",
-      "definition": "--> Insert here the billing-service-api API definition <---\n"
+      "definition": "--> Insert here the billing-service-api API definition <---"
     }
   }
 ]

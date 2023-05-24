@@ -15,7 +15,8 @@
       "owner": "guests",
       "providesApis": [
         "address-validation-service-api"
-      ]
+      ],
+      "consumesApis": []
     }
   },
   {
@@ -32,7 +33,7 @@
       "type": "openapi",
       "lifecycle": "experimental",
       "owner": "guests",
-      "definition": "--> Insert here the address-validation-service API definition <---\n"
+      "definition": "--> Insert here the address-validation-service API definition <---"
     }
   }
 ]

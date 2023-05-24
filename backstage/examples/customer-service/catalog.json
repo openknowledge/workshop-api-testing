@@ -12,7 +12,9 @@
     "spec": {
       "type": "service",
       "lifecycle": "experimental",
-      "owner": "guests"
+      "owner": "guests",
+      "providesApis": [],
+      "consumesApis": []
     }
   }
 ]
